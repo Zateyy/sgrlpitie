@@ -25,6 +25,10 @@ public class HoldingTool : MonoBehaviour
     //demande besoin interaction pour vider
     public bool isRequiringInput;
 
+    //event -> pour les objectifs
+    public delegate void ObjectHadSomethingHappen(Objective objective);
+    public static event ObjectHadSomethingHappen ObjectHadSomethingHappenEvent;
+
     //************************************************************* FONCTIONS
 
     private void Start()

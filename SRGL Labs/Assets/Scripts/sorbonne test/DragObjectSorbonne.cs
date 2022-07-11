@@ -12,14 +12,12 @@ public class DragObjectSorbonne : MonoBehaviour
     public GameObject levelManager;
     bool isInSorbonne;
 
-    bool wasMovingWindow = false;
-
     //*********************************************************** FONCTIONS
-    // Start is called before the first frame update
-    void Start()
+
+    void OnEnable()
     {
-        isInSorbonne = levelManager.GetComponent<lvlmanagersorb>().isInSorbonne;
-        transform.position = new Vector3(-0.03f, 5, -9.63f);
+        isInSorbonne = levelManager.GetComponent<LevelOneLevelManager>().isInSorbonne;
+        transform.position = new Vector3(8.08f, 1f, -4.70f);
         //print(transform.position);
     }
 
@@ -36,20 +34,19 @@ public class DragObjectSorbonne : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
         if (!isInSorbonne && Physics.Raycast(ray, out hit) && hit.transform.name.Equals("Vitre")) //si vitre
         {
             Vector3 mousePosition = GetMousePosition();
             transform.position = new Vector3(transform.position.x, mousePosition.y, transform.position.z);
 
             //attention pas aller trop loin
-            if (transform.position.y < 5)
+            if (transform.position.y < 0.99f)
             {
-                transform.position = new Vector3(transform.position.x, 5, transform.position.z);
+                transform.position = new Vector3(transform.position.x, 0.99f, transform.position.z);
             }
-            else if (transform.position.y > 9)
+            else if (transform.position.y > 1.83f)
             {
-                transform.position = new Vector3(transform.position.x, 9, transform.position.z);
+                transform.position = new Vector3(transform.position.x, 1.83f, transform.position.z);
             }
 
         }
@@ -57,14 +54,20 @@ public class DragObjectSorbonne : MonoBehaviour
 
     private void OnMouseUp() //lacher
     {
-        float wantedPosition = 7.22f; //position souhaitée
+        float wantedPosition = 1.44f; //position souhaitée
         if (transform.position.y >= wantedPosition-0.1 && transform.position.y <= wantedPosition+0.1) //si bien placé
         {
-            OnPositionSet(3); //message ok (niveau 3 placeholder)
+            if (OnPositionSet != null)
+            {
+                OnPositionSet(3); //message ok (niveau 3 placeholder)
+            } 
         }
         else //si mal placé
         {
-            OnPositionSet(1); //message pas ok (niveau 1 placeholder)
+            if (OnPositionSet != null)
+            {
+                OnPositionSet(1); //(niveau 1 placeholder)
+            }
         }
     }
 }

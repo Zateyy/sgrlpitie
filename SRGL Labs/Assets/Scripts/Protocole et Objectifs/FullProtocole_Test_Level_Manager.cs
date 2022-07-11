@@ -48,8 +48,8 @@ public class FullProtocole_Test_Level_Manager : MonoBehaviour
 
     private void Start()
     {
-        this.protocole.listOfObjectives.Add(this.protocole.DeserializeJSONProtocole());
-        this.protocole.dictionaryOfObjectives.Add(this.protocole.DeserializeJSONProtocole(),false);
+        //this.protocole.listOfObjectives.Add(this.protocole.DeserializeJSONProtocole());
+        //this.protocole.dictionaryOfObjectives.Add(this.protocole.DeserializeJSONProtocole(),false);
 
         this.allPossibleErrors = this.protocole.DeserializeJSONErrors(jsonErrorFile);
 
