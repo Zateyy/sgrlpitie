@@ -123,11 +123,46 @@ public class Protocole
 
     //-> deserialisation du fichier json contenant les etapes du protocole
 
-    public Objective DeserializeJSONProtocole()
+    public void DeserializeJSONProtocole(TextAsset json)
     {
-        string str = "{\"dictionaryOfElementsAndQuantityRequired\":{\"poudre\" : 20 }}"; /*"{\"tagOrNameOfObject\" : \"Fiole\"}";*/
+        /*string str = "{\"dictionaryOfElementsAndQuantityRequired\":{\"poudre\" : 20 }}"; /*"{\"tagOrNameOfObject\" : \"Fiole\"}";
         //Debug.Log(str);
-        return Newtonsoft.Json.JsonConvert.DeserializeObject<ObjectiveContainsDictionary>(str);
+        return Newtonsoft.Json.JsonConvert.DeserializeObject<ObjectiveContainsDictionary>(str);*/
+
+        ObjectiveManager objectiveManager = Newtonsoft.Json.JsonConvert.DeserializeObject<ObjectiveManager>(json.text);
+        int counterMax = objectiveManager.Contient.Count + objectiveManager.Put.Count + objectiveManager.take.Count;
+        int counter = 1;
+        while (counter < counterMax+1)
+        {
+            foreach(ObjectiveContains obj in objectiveManager.Contient)
+            {
+                if (obj.numero == counter)
+                {
+                    listOfObjectives.Add(obj);
+                    dictionaryOfObjectives.Add(obj, false);
+                    counter++;
+                }
+            }
+            foreach (ObjectivePlaceItem obj in objectiveManager.Put)
+            {
+                if (obj.numero == counter)
+                {
+                    listOfObjectives.Add(obj);
+                    dictionaryOfObjectives.Add(obj, false);
+                    counter++;
+                }
+            }
+            foreach (ObjectiveGrabItem obj in objectiveManager.take)
+            {
+                if (obj.numero == counter)
+                {
+                    listOfObjectives.Add(obj);
+                    dictionaryOfObjectives.Add(obj, false);
+                    counter++;
+                }
+            }
+        }
+
     }
 
     //-> deserialisation du fichier json contenant les erreurs possibles

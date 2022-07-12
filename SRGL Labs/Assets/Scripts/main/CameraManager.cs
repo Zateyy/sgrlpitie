@@ -17,6 +17,10 @@ public class CameraManager : MonoBehaviour
     //current placement 
     int currentPlacement; //0 = paillasse / 1 = balance / 2 = sorbonne
 
+    //events
+    public delegate void IntEvent(int levelOfSecurity);
+    public static event IntEvent OnNewArea; //nouvelle zone
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +52,10 @@ public class CameraManager : MonoBehaviour
         gameObject.LeanRotate(sorbonneRotation, 1f);
 
         currentPlacement = 2;
+        if (OnNewArea != null)
+        {
+            OnNewArea(currentPlacement); //event
+        }
     }
     void GoToBalance() //direction balance 
     {
@@ -55,6 +63,10 @@ public class CameraManager : MonoBehaviour
         gameObject.LeanRotate(balanceRotation, 1f);
 
         currentPlacement = 1;
+        if (OnNewArea != null)
+        {
+            OnNewArea(currentPlacement); //event
+        }
     }
     void GoToDesk() //direction paillasse 
     {
@@ -62,6 +74,10 @@ public class CameraManager : MonoBehaviour
         gameObject.LeanRotate(deskRotation, 1f);
 
         currentPlacement = 0;
+        if (OnNewArea != null)
+        {
+            OnNewArea(currentPlacement); //event
+        }
     }
 
 

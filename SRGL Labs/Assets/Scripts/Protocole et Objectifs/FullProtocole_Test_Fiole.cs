@@ -71,11 +71,11 @@ public class FullProtocole_Test_Fiole : Container
 
     public override void ObjectGotGrabbed()
     {
-        ObjectiveGrabItem objgi = new ObjectiveGrabItem(this.tag);
+        /*ObjectiveGrabItem objgi = new ObjectiveGrabItem(this.tag);
         if (ObjectHadSomethingHappenEvent != null)
         {
             ObjectHadSomethingHappenEvent(objgi);
-        }
+        }*/
 
     }
 

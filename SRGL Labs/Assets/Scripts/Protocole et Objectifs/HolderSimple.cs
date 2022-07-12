@@ -25,11 +25,11 @@ public class HolderSimple : MonoBehaviour
 
     public void ObjectGotGrabbed()
     {
-        ObjectiveGrabItem objgi = new ObjectiveGrabItem(this.name);
+        /*ObjectiveGrabItem objgi = new ObjectiveGrabItem(this.name);
         if (ObjectHadSomethingHappenEvent != null)
         {
             ObjectHadSomethingHappenEvent(objgi);
-        }
+        }*/
 
     }
 

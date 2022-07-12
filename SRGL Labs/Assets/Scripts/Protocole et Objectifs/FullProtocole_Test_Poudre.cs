@@ -29,11 +29,11 @@ public class FullProtocole_Test_Poudre : Container
 
     public override void ObjectGotGrabbed()
     {
-        ObjectiveGrabItem objgi = new ObjectiveGrabItem(this.tag);
+        /*ObjectiveGrabItem objgi = new ObjectiveGrabItem(this.tag);
         if (ObjectHadSomethingHappenEventPoudre != null)
         {
             ObjectHadSomethingHappenEventPoudre(objgi);
-        }
+        }*/
     }
 
     public override void AddElement(Dictionary<string, int> elementDictionary)

@@ -8,12 +8,14 @@ public class ObjectiveGrabItem : Objective
 {
     //Tag de l'objet que l'on veut
     //On pourra modifier plus tard pour un systeme plus complexe
-    public string tagOrNameOfObject;
+    public string container;
+    public int numero;
 
     //Constructeur
-    public ObjectiveGrabItem(string tagOrName)
+    public ObjectiveGrabItem(string tagOrName, int nb)
     {
-        this.tagOrNameOfObject = tagOrName;
+        this.container = tagOrName;
+        this.numero = nb;
     }
 
     public override bool Evaluate(Objective obj)
@@ -22,7 +24,7 @@ public class ObjectiveGrabItem : Objective
         if (obj.GetType() == typeof(ObjectiveGrabItem))
         {
             ObjectiveGrabItem temp = (ObjectiveGrabItem)obj;
-            return temp.tagOrNameOfObject.Equals(this.tagOrNameOfObject);
+            return temp.container.Equals(this.container);
         }
         else
         {
