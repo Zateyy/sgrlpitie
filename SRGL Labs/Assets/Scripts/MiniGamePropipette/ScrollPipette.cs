@@ -9,7 +9,7 @@ public class ScrollPipette : MonoBehaviour
     public SphereColliderScript sphereColliderScript;
     public CylinderColliderScript cylinderColliderScript;
     public TextMeshPro mText;
-    public float step = 0.1f;
+    public float step = 0.00002f;
     float LastTimeSinceScroll = 0;
     public bool bienPlace =false;
     public bool ICanScroll = true;
@@ -32,10 +32,11 @@ public class ScrollPipette : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (((Mouse.current.scroll.ReadValue().y >0 && transform.position.y<7) || (Mouse.current.scroll.ReadValue().y < 0 && transform.position.y > 5)) && ICanScroll)
+        
+        if (((Mouse.current.scroll.ReadValue().y >0 && transform.position.y<1.52f) || (Mouse.current.scroll.ReadValue().y < 0 && transform.position.y > 1.43f)) && ICanScroll)
         {
             
-            transform.position+= new Vector3(0,step*(Mouse.current.scroll.ReadValue().y/Mathf.Abs(Mouse.current.scroll.ReadValue().y)) , 0);
+            transform.position+= new Vector3(0,step*(Mouse.current.scroll.ReadValue().y/Mathf.Abs(Mouse.current.scroll.ReadValue().y))/10 , 0);
             if (cylinderColliderScript.isPlaced)
             {
                 if (Mouse.current.scroll.ReadValue().y < 0)
@@ -44,15 +45,15 @@ public class ScrollPipette : MonoBehaviour
                 }
                 else
                 {
-                    step *=1.5f;
+                    //step *=1.5f;
                 }
                 LastTimeSinceScroll = Time.realtimeSinceStartup;
             }
-            if (step < 0.02)                //fair gigoter la propipette si elle n'avance plus assez
+            /*if (step < 0.02)                //fair gigoter la propipette si elle n'avance plus assez
             {
                 transform.position += new Vector3(0, 0.015f*sensTemp , 0);
                 sensTemp *= -1;
-            }
+            }*/
         }
         
 
@@ -60,10 +61,10 @@ public class ScrollPipette : MonoBehaviour
         {
             if (!sphereColliderScript.isBroken)
             {
-                if (transform.position.y < 5.4)
+                if (transform.position.y < 1.444)
                 {
                     mText.SetText("La propipette est en place");
-                    
+                    Debug.Log("La propipette est en place");
                     bienPlace = true;
                 }
 
@@ -72,7 +73,8 @@ public class ScrollPipette : MonoBehaviour
             {
                 bienPlace = false;
                 mText.SetText("La propipette est cassé");
-                transform.position = new Vector3(transform.position.x, 4.8f, transform.position.z);//se baisse d'un coup si elle est cassé
+                Debug.Log(transform.position.y);
+                transform.position = new Vector3(transform.position.x, 1.40f, transform.position.z);//se baisse d'un coup si elle est cassé
             }
             
         }

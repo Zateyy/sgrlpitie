@@ -31,6 +31,13 @@ public class gameManagerPro : MonoBehaviour
     //position de base propipette
     Vector3 propBasePos;
 
+    //rotation de base propipette
+
+    float propBaseRotx;
+    float propBaseRoty;
+    float propBaseRotz;
+
+
     //mouse
     bool mouseEnabled = true;
 
@@ -47,7 +54,13 @@ public class gameManagerPro : MonoBehaviour
         gameObject.GetComponent<LiquidGestion>().enabled = false;
         cameraBasePos = transform.position;
         propBasePos = propipette.transform.position;
-        
+
+        //ATTENTION HARDCODE DEGEU
+        propBaseRotx = 76;
+        propBaseRoty = -85;
+        propBaseRotz = 1.88f;
+
+
     }
 
     //MAIN
@@ -79,8 +92,9 @@ public class gameManagerPro : MonoBehaviour
 
                         mouseEnabled = false;
 
-                        propipette.LeanMove(new Vector3(myHand.transform.position.x, myHand.transform.position.y + 3, myHand.transform.position.z), 0.5f).setEaseOutQuart(); //mouvement propipette
-                        gameObject.LeanMove(new Vector3(myHand.transform.position.x, myHand.transform.position.y + 2f, myHand.transform.position.z - 3), 0.5f).setEaseOutQuart(); //mouvement camera
+                        propipette.LeanMove(new Vector3(myHand.transform.position.x +0.55f , myHand.transform.position.y +0.55f, myHand.transform.position.z), 0.5f).setEaseOutQuart(); //mouvement propipette
+                        propipette.LeanRotate(new Vector3(0, 0, 0), 0.5f).setEaseOutQuart(); //rotation propipette
+                        gameObject.LeanMove(new Vector3(myHand.transform.position.x +0.55f , myHand.transform.position.y + 0.492f , myHand.transform.position.z - 0.169f ), 0.5f).setEaseOutQuart(); //mouvement camera
 
                         LeanTween.delayedCall(0.5f, EnableMouse);
 
@@ -276,7 +290,7 @@ public class gameManagerPro : MonoBehaviour
 
         if (target.CompareTag("pipette"))
         {
-            Vector3 temp = new Vector3(myHand.transform.position.x, myHand.transform.position.y + 2f, myHand.transform.position.z);
+            Vector3 temp = new Vector3(myHand.transform.position.x + 0.55f, myHand.transform.position.y +0.45f , myHand.transform.position.z );
             target.LeanMove(temp, 0.5f).setEaseOutQuart();
         }
         else
